@@ -9,3 +9,5 @@ requirements = python3,kivy,flask,werkzeug,jinja2,itsdangerous,click,blinker,mar
 orientation = portrait
 fullscreen = 0
 android.permissions = INTERNET
+android.api = 33
+android.minapi = 21
