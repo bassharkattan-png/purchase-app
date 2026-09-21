@@ -17,13 +17,16 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install Buildozer dependencies
+    - name: Install System Dependencies
       run: |
+        sudo dpkg --add-architecture i386
         sudo apt-get update
-        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+        sudo apt-get install -y build-cache git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev libstdc++6:i386 libz1:i386
 
-    - name: Install Buildozer
-      run: pip install --upgrade buildozer
+    - name: Install Buildozer and Cython
+      run: |
+        pip install --upgrade pip
+        pip install --upgrade cython==0.29.36 buildozer
 
     - name: Build APK with Buildozer
       run: |
@@ -34,4 +37,3 @@ jobs:
       with:
         name: package-release-apk
         path: bin/*.apk
-
